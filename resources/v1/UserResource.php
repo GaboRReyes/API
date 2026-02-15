@@ -32,8 +32,8 @@ class UserResource
                 $user_item = array(
                     "id" => $id,
                     "name" => $name,
-                    "n_control" => $n_control,
-                    "entry_date" => $entry_date
+                    "email" => $email,
+                    "created_at" => $created_at
                 );
                 array_push($users_arr["records"], $user_item);
             }
@@ -57,8 +57,8 @@ class UserResource
             $user_arr = array(
                 "id" => $this->user->id,
                 "name" => $this->user->name,
-                "n_control" => $this->user->n_control,
-                "entry_date" => $this->user->entry_date
+                "email" => $this->user->email,
+                "created_at" => $this->user->created_at
             );
 
             http_response_code(200);
@@ -78,7 +78,7 @@ class UserResource
 
         if (!empty($data->name) && !empty($data->email)) {
             $this->user->name = $data->name;
-            $this->user->email = $data->n_control;
+            $this->user->email = $data->email;
 
             if ($this->user->create()) {
                 http_response_code(201);
@@ -92,7 +92,7 @@ class UserResource
             }
         } else {
             http_response_code(400);
-            echo json_encode(array("message" => "Datos incompletos"));
+            echo json_encode(array("message" => "Datos incompletos. Se requiere name y email"));
         }
     }
 
@@ -107,7 +107,7 @@ class UserResource
 
         if (!empty($data->name) && !empty($data->email)) {
             $this->user->name = $data->name;
-            $this->user->email = $data->n_control;
+            $this->user->email = $data->email;
 
             if ($this->user->update()) {
                 http_response_code(200);
@@ -118,7 +118,7 @@ class UserResource
             }
         } else {
             http_response_code(400);
-            echo json_encode(array("message" => "Datos incompletos"));
+            echo json_encode(array("message" => "Datos incompletos. Se requiere name y email"));
         }
     }
 
@@ -138,4 +138,4 @@ class UserResource
         }
     }
 }
-?>
+?>  

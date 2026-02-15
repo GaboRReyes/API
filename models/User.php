@@ -17,17 +17,15 @@ class User
     public function create()
     {
         $query = "INSERT INTO " . $this->table_name . " 
-                  SET name=:name, email=:email, created_at=:created_at";
+                  SET name=:name, email=:email";
 
         $stmt = $this->conn->prepare($query);
 
         $this->name = htmlspecialchars(strip_tags($this->name));
         $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->created_at = date('Y-m-d H:i:s');
 
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":created_at", $this->created_at);
 
         if ($stmt->execute()) {
             $this->id = $this->conn->lastInsertId();
@@ -72,7 +70,7 @@ class User
     public function update()
     {
         $query = "UPDATE " . $this->table_name . " 
-                  SET name = :name, email = :email 
+                  SET name = :name, email = :email
                   WHERE id = :id";
 
         $stmt = $this->conn->prepare($query);
@@ -90,6 +88,7 @@ class User
         }
         return false;
     }
+
     public function delete()
     {
         $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
