@@ -16,9 +16,7 @@ class ApiUser
         $this->conn = $db;
     }
 
-    /**
-     * Find a user by username
-     */
+   
     public function findByUsername($username)
     {
         $query = "SELECT id, username, email, password_hash, status
@@ -42,6 +40,7 @@ class ApiUser
         }
         return false;
     }
+
 
     public function verifyPassword($plainPassword)
     {

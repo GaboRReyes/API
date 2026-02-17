@@ -7,13 +7,16 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 require_once '../core/Router.php';
 require_once '../resources/v1/UserResource.php';
 require_once '../resources/v1/ProductResource.php';
+require_once '../resources/v1/AuthResource.php'; 
 
-$scriptName = dirname($_SERVER['SCRIPT_NAME']);
-$basePath = $scriptName;
+$scriptDir = dirname($_SERVER['SCRIPT_NAME']);
+$basePath  = ($scriptDir === '/' || $scriptDir === '\\' || $scriptDir === '.') ? '' : $scriptDir;
 
-$router = new Router('v1', $basePath);
+$router       = new Router('v1', $basePath);
+$authResource = new AuthResource();
 $userResource = new UserResource();
 $productResource = new ProductResource();
+
 
 // user routes
 $router->addRoute('GET', '/users', [$userResource, 'index']);
@@ -28,6 +31,10 @@ $router->addRoute('GET', '/products/{id}', [$productResource, 'show']);
 $router->addRoute('POST', '/products', [$productResource, 'store']);
 $router->addRoute('PUT', '/products/{id}', [$productResource, 'update']);
 $router->addRoute('DELETE', '/products/{id}', [$productResource, 'destroy']);
+
+//login route
+$router->addRoute('POST', '/auth/login',  [$authResource, 'login']);
+$router->addRoute('POST', '/auth/logout', [$authResource, 'logout']);
 
 $router->dispatch();
 ?>

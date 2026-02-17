@@ -83,7 +83,7 @@ class UserResource
             if ($this->user->create()) {
                 http_response_code(201);
                 echo json_encode(array(
-                    "message" => "Usuario creado exitosamente",
+                    "message" => "Usuario creado     exitosamente",
                     "id" => $this->user->id
                 ));
             } else {
