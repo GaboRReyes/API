@@ -8,8 +8,6 @@ require_once '../core/Router.php';
 require_once '../resources/v1/UserResource.php';
 require_once '../resources/v1/ProductResource.php';
 
-echo "API is running...";
-
 $scriptName = dirname($_SERVER['SCRIPT_NAME']);
 $basePath = $scriptName;
 

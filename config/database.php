@@ -1,7 +1,7 @@
 <?php
 class Database
 {
-    private $host = "178.18.251.27";
+    private $host = "localhost";
     private $db_name = "topicosweb";
     private $username = "db_22030785";
     private $password = "22030785";
